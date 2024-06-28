@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome to Dashboard</h2>
+    <div id="userData"></div>
+    <button id="logoutButton">Logout</button>
+    <img src="" alt="">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="dashboard.js"></script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil data pengguna dari localStorage
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+            if (userData) {
+                // Tampilkan data pengguna di halaman
+                const userDataContainer = document.getElementById('userData');
+                userDataContainer.innerHTML = `
+                <p><strong>Email:</strong> ${userData.data.id_user}</p>
+                    <p><strong>Name:</strong> ${userData.data.name}</p>
+                    <p><strong>email:</strong> ${userData.data.email}</p>
+                    <p><strong>rent:</strong> ${userData.data.rent}</p>
+                    <p><strong>bookmark:</strong> ${userData.data.bookmark}</p>
+                    <img src="${userData.data.avatar}" alt="">
+                    <!-- Tambahkan lebih banyak informasi pengguna sesuai kebutuhan -->
+                `;
+            } else {
+                // Jika tidak ada data pengguna, redirect ke halaman login
+                window.location.href = 'index.html'; // Ganti dengan halaman login yang sesuai
+            }
+
+            // Tambahkan event listener untuk tombol logout
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                // Hapus data pengguna dari localStorage
+                localStorage.removeItem('userData');
+                // Redirect ke halaman login
+                window.location.href = 'index.html'; // Ganti dengan halaman login yang sesuai
+            });
+        });
+
+    </script>
+</body>
+</html>
