@@ -13,7 +13,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     .then(function (response) {
         // Handle success
         if (response.data.data.role === 'user') {
-            document.getElementById('errorMessage').innerText = 'Hei Anda Bukan Admin-ya!!';
+            document.getElementById('errorMessage').innerText = 'Staff Only!!';
             // Tampilkan pesan atau lakukan tindakan lain jika role bukan admin
             return; // Keluar dari fungsi login jika role bukan admin
         }else {
@@ -27,7 +27,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         // Handle error
         console.error('Login failed');
         console.error(error);
-        document.getElementById('errorMessage').innerText = 'Login Gagal, Salah Input Kali Lu!';
+        document.getElementById('errorMessage').innerText = 'Login Gagal!!';
         // Example: Display an error message to the user
         // alert('Login failed. Please check your credentials.');
     });

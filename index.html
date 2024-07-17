@@ -1,37 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Login Form</title>
-</head>
-<body>
-    <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="card p-5 shadow">
-            <div class="card-body">
-                <h5 class="card-title text-center">Yuk Login</h5>
-                <form id="loginForm">
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input class="form-control" type="email" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input class="form-control" type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <p class="mt-2" id="errorMessage" style="color: red; font-weight: bold;"></p>
-                </form>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="resources/css/styleIndex.css" />
+
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+
+    <title>Rental PS</title>
+  </head>
+  <body data-spy="scroll" data-bs-target="#navbarResponsive">
+
+    <!-- navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-lg p-3 mb-5 bg-body rounded">
+      <div class="container">
+        <a class="navbar-brand" href="#">Rental PS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#icon">Facilities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#culinary">Console</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallery">Gallery</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar end -->
+
+    <!-- header start -->
+    <section id="home">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div class="masthead">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="resources/img/carausel/ps.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block title mb-5">
+              <h3 class="text1"></h3>
+              <h1 class="text2"></h1>
+              <p class="paragraf"></p>
             </div>
+            </div>
+            <div class="carousel-item">
+              <img src="resources/img/carausel/xbox.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block title mb-5">
+                <h3 class="text1"></h3>
+                <h1 class="text2"></h1>
+                <p class="paragraf"></p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="resources/img/carausel/nitendo.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block title mb-5">
+                <h3 class="text1"></h3>
+                <h1 class="text2"></h1>
+                <p class="paragraf"></p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="resources/img/carausel/handheld.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block title mb-5">
+                <h3 class="text1"></h3>
+                <h1 class="text2"></h1>
+                <p class="paragraf"></p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+  </section>
+    <!-- header end -->
+
+    <!-- about start -->
+    <section id="about" class="pt-2 pb-5">
+      <div class="container offset pb-3 pt-2">
+        <div class="row text-center mb-3">
+          <div class="col">
+            <h2>About Rental IVO</h2>
+            <hr class="w-50 mx-auto pb-1" />
+          </div>
         </div>
-        <div class="text-center m-5">
-            <p>Buatan Anak PKL PNM</p>
+        <div class="row justify-content-center fs-6 text-center mb-5">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="200" data-aos-duration="2000">
+            <img src="resources/img/sarangan.jpg" class="rounded mx-auto d-block" alt="">
+          </div>
+          <div class="col-md-4" data-aos="fade-left" data-aos-offset="200" data-aos-duration="2000">
+            <h4>lorem ipsum</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quisquam sequi consequatur voluptates sint odit, consectetur reiciendis voluptas fuga inventore nisi, voluptatibus cum, tenetur dignissimos ea quibusdam deserunt nemo dolore!
+            </p>
+          </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="resources/js/login.js"></script>
-</body>
+      </div>
+    </section>
+    <!-- about end -->
+
+    <!-- travel icon start -->
+    <section id="icon" class="bg-dark pt-5 pb-5">
+      <div class="container pb-3 pt-3">
+        <div class="row text-center mb-3">
+          <div class="col">
+            <h2 style="color: #fff">Facilities</h2>
+            <hr class="w-50 mx-auto pb-1" style="color: #fff" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down-right" data-aos-duration="1000">
+              <img src="resources/img/iconic/2.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h4>Service 24H</h4>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down" data-aos-duration="1000">
+              <img src="resources/img/iconic/1.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h4>Penginapan</h4>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down-left" data-aos-duration="1000">
+              <img src="resources/img/iconic/3.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h4>Sewa Speed Boat</h4>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </section>
+    <!-- travel icon end -->
+
+    <!-- culinary start -->
+    
+    <section id="culinary" class="bg-light pt-5 pb-5">
+      <div class="container pb-3 pt-3">
+        <div class="row text-center mb-3">
+          <div class="col">
+            <h2>Console</h2>
+            <hr class="w-50 mx-auto pb-1"/>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down-right" data-aos-duration="1000">
+              <img src="resources/img/console/ps.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h5>Play Station</h5>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down" data-aos-duration="1000">
+              <img src="resources/img/console/xbox.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h5>Xbox</h5>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down-left" data-aos-duration="1000">
+              <img src="resources/img/console/nitendo.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h5>Nintendo Switch</h5>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-down-left" data-aos-duration="1000">
+              <img src="resources/img/console/handheld.jpg" class="card-img-top" alt="wkwk" />
+              <div class="card-body">
+                <h5>Handheld</h5>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- culinary end -->
+
+    <!-- gallery start -->
+    <section id="gallery" class="pt-5 pb-5">
+      <div class="container pt-5 pb-3">
+        <div class="row text-center mb-3">
+          <div class="col">
+            <h2>Gallery</h2>
+            <hr class="w-50 mx-auto pb-1" />
+          </div>
+        </div>
+        <div class="row mt-n1">
+          <div class="col-md-3">
+            <a href="#">
+              <img src="resources/img/gallery/ps.png" alt="wkwkw" class="img-fluid gallery-img" />
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="#">
+              <img src="resources/img/gallery/nitendo.png" alt="wkwkw" class="img-fluid gallery-img" />
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="#">
+              <img src="resources/img/gallery/xbox.png" alt="wkwkw" class="img-fluid gallery-img" />
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="#">
+              <img src="resources/img/gallery/steam.png" alt="wkwkw" class="img-fluid gallery-img" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- gallery end -->
+
+
+    <!-- fotter start -->
+    <footer class="text-center pb-2 pt-3" style="background-color: rgba(0, 0, 0, 0.8)">
+      <p class="text-light mb-1">Anda Admin Masuk Sini :</p>
+      <p><a href="login.html" class="fw-bold text-light">Click Here!</a></p>
+    </footer>
+    <!-- fotter end -->
+
+    <!-- Gsap start-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      const galleryImage = document.querySelectorAll(".gallery-img");
+      galleryImage.forEach((img, i) => {
+        img.dataset.aos = "zoom-out-up";
+        img.dataset.aosdelay = i * 150;
+        img.dataset.aosduration = 2000;
+      });
+
+      AOS.init({
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js"></script>
+    <script>
+      gsap.registerPlugin(TextPlugin);
+      gsap.to(".text1", { duration: 1, delay: 1, text: "Welcome to" });
+      gsap.to(".text2", { duration: 2, delay: 2, text: "PS Rent IVO" });
+      
+    </script>
+    <!-- gsap end -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+  </body>
 </html>

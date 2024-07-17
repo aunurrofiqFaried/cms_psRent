@@ -68,7 +68,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="../cs/customerService.html" class="sidebar-link">
               <i class="lni lni-customer"></i>
               <span>Customer Service</span>
             </a>
@@ -90,6 +90,13 @@
             </div>
             <div class="card-body">
               <table class="table table-borderless text-center">
+                <thead>
+                  <tr>
+                    <th>Forum Avatar</th>
+                    <th>Nama Forum</th>
+                    <th>Deskripsi</th>
+                  </tr>
+                </thead>
                 <tbody id="result"></tbody>
               </table>
             </div>
@@ -98,7 +105,7 @@
         <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="staticBackdropLabel">Create Forum</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="refreshPage()"></button>
           </div>
           <div class="offcanvas-body">
             <div>
@@ -115,13 +122,16 @@
                 <textarea class="form-control" placeholder="Leave a comment here" id="deskripsi" style="height: 100px"></textarea>
                 <label for="deskripsi">Deskripsi</label>
               </div>
-              <button class="btn btn-primary " onclick="uploadImage()">Submit</button>
+              <button class="btn btn-primary " id="buttonForum" onclick="uploadImage()">Submit</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <script>
+      function refreshPage(){
+        window.location.reload();
+      } 
       document.getElementById('formFile').addEventListener('change', function(event) {
             const file = event.target.files[0];
 
@@ -196,6 +206,60 @@
                 console.error('Terjadi kesalahan:', error);
             });
         }
+
+    function editData(id_forum) {
+      const fileInput = document.getElementById('formFile');
+      const file = fileInput.files[0];
+
+      const formData = new FormData();
+      if (file) {
+          // Validasi format file
+          const validTypes = ['image/jpeg', 'image/png'];
+          if (!validTypes.includes(file.type)) {
+              alert('Only JPG and PNG files are allowed!');
+              return;
+          }
+
+          // Validasi ukuran file (maksimal 1MB)
+          const maxSize = 1 * 1024 * 1024; // 1MB
+          if (file.size > maxSize) {
+              alert('File size must be less than 1MB!');
+              return;
+          }
+
+          formData.append('image', file);
+      }
+
+      const name = document.getElementById('name').value;
+      const description = document.getElementById('deskripsi').value;
+
+      formData.append('name', name);
+      formData.append('deskripsi', description);
+
+      const uploadUrl = `https://rentconsoleapi.yudho.online/forum/${id_forum}`;
+
+      axios.put(uploadUrl, formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+            console.log('URL gambar berhasil disimpan:', response.data);
+            location.reload(true)
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+        });
+    }
+
+
+
+      const updateData = async (id_forum, name,deskripsi) => {
+        document.getElementById('name').value = name;
+        document.getElementById('deskripsi').value = deskripsi;
+        document.getElementById('buttonForum').innerText = 'Update';
+        document.getElementById('buttonForum').setAttribute('onClick', `editData(${id_forum})`);
+      }
       const deleteData = async (uid) => {
         const id = uid
         await axios.delete(`https://rentconsoleapi.yudho.online/forum/${id}`)
@@ -209,10 +273,13 @@
       };
   document.addEventListener('DOMContentLoaded', function() {
     const getData = async () => {
-      await axios.get('https://rentconsoleapi.yudho.online/forum/1')
+      await axios.get('https://rentconsoleapi.yudho.online/forum')
         .then((response) => {
           let bucket = ``;
           let item = response.data.data;
+          console.log(item)
+          let jumlah = item.length
+          console.log(jumlah) 
           if (item.length > 0) {
             for (let i = 0; i < item.length; i++) {
               if (item[i].image == null) {
@@ -226,6 +293,7 @@
                   <td>${item[i].deskripsi}</td>
                   <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                      <button onclick="updateData('${item[i].id_forum}','${item[i].name}','${item[i].deskripsi}')" type="button" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Update</button>
                       <button onclick="deleteData(${item[i].id_forum})" type="button" class="btn btn-danger">Delete</button>
                     </div>
                   </td>
@@ -253,20 +321,21 @@
       }
       getData()
     // Ambil data pengguna dari localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
-    // if (userData) {
-    //   console.log(userData)
-    //   } else {
-    //     // Jika tidak ada data pengguna, redirect ke halaman login
-    //     window.location.href = '../../index.html'; // Ganti dengan halaman login yang sesuai
-    //   }
+    if (userData) {
+      console.log(userData)
+      } else {
+        // Jika tidak ada data pengguna, redirect ke halaman login
+        window.location.href = '../../login.html'; 
+      }
 
       // Tambahkan event listener untuk tombol logout
       document.getElementById('logoutButton').addEventListener('click', function() {
                 // Hapus data pengguna dari localStorage
         localStorage.removeItem('userData');
                 // Redirect ke halaman login
-        window.location.href = '../../index.html'; // Ganti dengan halaman login yang sesuai
+        window.location.href = '../../login.html';
       });
   });
     </script>

@@ -1,0 +1,127 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
+
+
+html, body {
+  max-width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scrollbar-height: none;  /* Firefox */
+}
+
+/* navbar */
+.offset:before {
+  display: block;
+  content: "";
+  height: 5rem;
+}
+
+.navbar {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  background: rgba(0, 0, 0, 0.6) !important;
+  padding: 20px 0;
+}
+
+.navbar-brand {
+  color: #18e7c8 !important;
+}
+
+.navbar .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link:hover {
+  color: #18e7c8;
+}
+
+/* header */
+
+.title h3 {
+  margin-bottom: -3px;
+  color: #fff;
+  font-weight: 300;
+  font-family: "Raleway", sans-serif;
+  text-shadow: rgba(2, 1, 1, 2);
+}
+
+.title h1 {
+  font-weight: bolder;
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  text-shadow: rgba(2, 1, 1, 2);
+}
+
+/* section */
+section h2 {
+  font-size: 2em;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* about */
+#about .mb-5 {
+  margin-bottom: 50px !important;
+}
+
+#about img {
+  margin-top: 10px;
+  width: 350px;
+}
+
+/* travel icon */
+
+
+/* culinary */
+
+
+/* gallery */
+#gallery {
+  margin-top: -30px;
+}
+
+#gallery img {
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+
+#gallery img:hover {
+  transform: scale(1.1);
+  border-radius: 20px;
+  opacity: 1;
+  z-index: 10 !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.192);
+}
+
+#gallery .mb-5 {
+  margin-bottom: 150px !important;
+}
+
+/* contact Us */
+
+.mt-5 {
+  margin-top: 15rem !important;
+}
+
+.contact {
+  margin-top: 1.6rem;
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+

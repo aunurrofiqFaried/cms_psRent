@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rental PS</title>
   <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="../resources/css/style.css">
 </head>
@@ -81,47 +82,54 @@
       </div>
     </aside>
     <div class="main">
-      <nav class="navbar navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="#">Dashboard Rental</a>
-        </div>
-      </nav>
-      <div class="container-fluid text-center mt-3">
-        <div class="row d-flex justify-content-center">
-          <div class="col">
-            <div class="card shadow" style="width: 45rem;">
-              <ul class="list-group list-group-flush">
-                <i class="lni lni-users" id="icon-dash"></i>
-                <li class="list-group-item" id="value-dash">300</li>
-                <li class="list-group-item" id="name-dash">Users</li>
-              </ul>
+      <div class="card border-0">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card shadow p-4">
+                  <h1>Selamat Datang ! </h1>
+                  <p style="font-size: larger;" id="name"></p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="card shadow" style="width: 35rem;">
-              <ul class="list-group list-group-flush">
-                <i class="lni lni-playstation" id="icon-dash"></i>
-                <li class="list-group-item" id="value-dash">51</li>
-                <li class="list-group-item" id="name-dash">Item PS</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow" style="width: 15rem;">
-              <ul class="list-group list-group-flush">
-                <i class="lni lni-direction" id="icon-dash"></i>
-                <li class="list-group-item" id="value-dash">1000</li>
-                <li class="list-group-item" id="name-dash">Rent</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow" style="width: 15rem;">
-              <ul class="list-group list-group-flush">
-                <i class="lni lni-blackboard" id="icon-dash"></i>
-                <li class="list-group-item" id="value-dash">5</li>
-                <li class="list-group-item" id="name-dash">Forum</li>
-              </ul>
+            <div class="row d-flex text-center mt-3">
+              <div class="col-lg-3 mb-3">
+                <div class="card shadow">
+                  <ul class="list-group list-group-flush">
+                    <i class="lni lni-users" id="icon-dash"></i>
+                    <li class="list-group-item value-dash" id="userJumlah"></li>
+                    <li class="list-group-item" id="name-dash">Users</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 mb-3">
+                <div class="card shadow">
+                  <ul class="list-group list-group-flush">
+                    <i class="lni lni-playstation" id="icon-dash"></i>
+                    <li class="list-group-item value-dash" id="itemJumlah"></li>
+                    <li class="list-group-item" id="name-dash">Item</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 mb-3">
+                <div class="card shadow">
+                  <ul class="list-group list-group-flush">
+                    <i class="lni lni-direction" id="icon-dash"></i>
+                    <li class="list-group-item value-dash" id="rentJumlah"></li>
+                    <li class="list-group-item" id="name-dash">Rent</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 mb-3">
+                <div class="card shadow">
+                  <ul class="list-group list-group-flush">
+                    <i class="lni lni-blackboard" id="icon-dash"></i>
+                    <li class="list-group-item value-dash" id="forumJumlah"></li>
+                    <li class="list-group-item" id="name-dash">Forum</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -130,34 +138,99 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const getDataUser = async () => {
+      await axios.get('https://rentconsoleapi.yudho.online/person/?filter=user')
+      .then((response) => {
+        let user = response.data.data
+        let jumlahUser = user.length
+        document.getElementById("userJumlah").innerHTML = jumlahUser;
+        console.log(jumlahUser)
+      })
+      .catch((error) => {
+        let bucket = `
+          ${error.message="Gangguan..."}
+          `;
+        alert(bucket)
+        // document.getElementById('result').innerHTML = bucket;
+      });
+    }
+    getDataUser()
+
+    const getDataItem = async () => {
+      await axios.get('https://rentconsoleapi.yudho.online/item')
+      .then((response) => {
+        let item = response.data.data
+        let jumlahItem = item.length
+        document.getElementById("itemJumlah").innerHTML = jumlahItem;
+        console.log(jumlahItem)
+      })
+      .catch((error) => {
+        let bucket = `
+          ${error.message="Gangguan..."}
+          `;
+        alert(bucket)
+        // document.getElementById('result').innerHTML = bucket;
+      });
+    }
+    getDataItem()
+
+    const getDataRent = async () => {
+      await axios.get('https://rentconsoleapi.yudho.online/rent')
+      .then((response) => {
+        let rent = response.data.data
+        let jumlahRent = rent.length
+        document.getElementById("rentJumlah").innerHTML = jumlahRent;
+        console.log(jumlahRent)
+      })
+      .catch((error) => {
+        let bucket = `
+          ${error.message="Gangguan..."}
+          `;
+        alert(bucket)
+        // document.getElementById('result').innerHTML = bucket;
+      });
+    }
+    getDataRent()
+
+    const getDataForum = async () => {
+      await axios.get('https://rentconsoleapi.yudho.online/forum/1')
+      .then((response) => {
+        let forum = response.data.data
+        let jumlahForum = forum.length
+        document.getElementById("forumJumlah").innerHTML = jumlahForum;
+        console.log(jumlahForum)
+      })
+      .catch((error) => {
+        let bucket = `
+          ${error.message="Gangguan..."}
+          `;
+        alert(bucket)
+        // document.getElementById('result').innerHTML = bucket;
+      });
+    }
+    getDataForum()
+    
         // Ambil data pengguna dari localStorage
         const userData = JSON.parse(localStorage.getItem('userData'));
 
-        // if (userData) {
-        //     // Tampilkan data pengguna di halaman
-        //     console.log(userData)
-        //     const userDataContainer = document.getElementById('userData');
-
-        //     userDataContainer.innerHTML = `
-        //     <p><strong>Email:</strong> ${userData.data.id_user}</p>
-        //         <p><strong>Name:</strong> ${userData.data.name}</p>
-        //         <p><strong>email:</strong> ${userData.data.email}</p>
-        //         <p><strong>rent:</strong> ${userData.data.rent}</p>
-        //         <p><strong>bookmark:</strong> ${userData.data.bookmark}</p>
-        //         <img src="${userData.data.avatar}" alt="">
-        //         <!-- Tambahkan lebih banyak informasi pengguna sesuai kebutuhan -->
-        //     `;
-        // } else {
-        //     // Jika tidak ada data pengguna, redirect ke halaman login
-        //     window.location.href = 'index.html'; // Ganti dengan halaman login yang sesuai
-        // }
+        if (userData) {
+            // Tampilkan data pengguna di halaman
+            console.log(userData.data.name)
+            let name = userData.data.name
+            document.getElementById("name").innerHTML = name;
+            // const userDataContainer = document.getElementById('userData');
+            
+        } else {
+            // Jika tidak ada data pengguna, redirect ke halaman login
+            window.location.href = '../login.html'; // Ganti dengan halaman login yang sesuai
+        }
 
         // Tambahkan event listener untuk tombol logout
         document.getElementById('logoutButton').addEventListener('click', function() {
             // Hapus data pengguna dari localStorage
             localStorage.removeItem('userData');
             // Redirect ke halaman login
-            window.location.href = '../index.html'; // Ganti dengan halaman login yang sesuai
+            window.location.href = '../login.html'; // Ganti dengan halaman login yang sesuai
         });
     });
 

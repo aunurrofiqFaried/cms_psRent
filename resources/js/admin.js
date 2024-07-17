@@ -2,7 +2,7 @@ const saveData = async () => {
   let emailForm = document.getElementById("email").value
   let nameForm = document.getElementById("name").value
   let passwordForm = document.getElementById("password").value
-  await axios.post(`https://rentconsoleapi.yudho.online/person/register/`, {
+  await axios.post(`https://rentconsoleapi.yudho.online/person/register/admin`, {
     email: emailForm,
     name: nameForm,
     password: passwordForm
@@ -16,7 +16,8 @@ const saveData = async () => {
     alert(error.response.data.message)
   });
 };
-const deleteDataUser = async (uid) => {
+
+const deleteDataAdmin = async (uid) => {
   const id = uid
   await axios.delete(`https://rentconsoleapi.yudho.online/person/${id}`)
     .then((response) => {
@@ -29,7 +30,7 @@ const deleteDataUser = async (uid) => {
 };
 document.addEventListener('DOMContentLoaded', function() {
 const getDataUser = async () => {
-await axios.get('https://rentconsoleapi.yudho.online/person/?filter=user')
+await axios.get('https://rentconsoleapi.yudho.online/person/?filter=admin')
   .then((response) => {
     let bucket = ``;
     let user = response.data.data;
@@ -46,7 +47,7 @@ await axios.get('https://rentconsoleapi.yudho.online/person/?filter=user')
             <td>${user[i].email}</td>
             <td>
               <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                <button onclick="deleteDataUser(${user[i].uid})" type="button" class="btn btn-danger">Delete</button>
+                <button onclick="deleteDataAdmin(${user[i].uid})" type="button" class="btn btn-danger">Delete</button>
               </div>
             </td>
           </tr>`
