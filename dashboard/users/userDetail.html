@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rent</title>
+    <title>Users</title>
     <link rel="stylesheet" href="../../resources/css/style.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -17,7 +17,7 @@
             <i class="lni lni-grid-alt"></i>
           </button>
           <div class="sidebar-logo">
-            <a href="#">RentalPS</a>
+            <a href="index.html">RentalPS</a>
           </div>
         </div>
         <ul class="sidebar-nav">
@@ -28,16 +28,16 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+            <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
               <i class="lni lni-user"></i>
               <span>Users</span>
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
-                <a href="../users/users.html" class="sidebar-link">Users</a>
+                <a href="#" class="sidebar-link sidebar-active">Users</a>
               </li>
               <li class="sidebar-item">
-                <a href="../users/admin.html" class="sidebar-link">admin</a>
+                <a href="admin.html" class="sidebar-link">admin</a>
               </li>
             </ul>
           </li>
@@ -68,7 +68,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link sidebar-active">
+            <a href="../cs/customerService.html" class="sidebar-link">
               <i class="lni lni-customer"></i>
               <span>Customer Service</span>
             </a>
@@ -84,85 +84,52 @@
       <div class="main">
         <div class="container mt-4 mb-4">
           <div class="card shadow">
-            <div class="card-header py-3 px-4 d-flex justify-content-between">
-              <h5>RentChat</h5>
+            <div class="card-header py-3 px-4 d-flex justify-content-start">
+              <h5>Detail User</h5>
             </div>
-            <div class="card-body">
-              <div id="listChat">
+            <div class="card-body mt-3 mb-3">
+              <div class="row p-1">
+                <div class="col-4">
+                  <img id="avatar" width="250px" src="" alt="">
+                </div>
+                <div class="col-8">
+                  <h4 id="name">name</h4>
+                  <h5 id="email">Email</h5>
+                  <p>Role : <span id="role">Role</span></p>
+                  <p>Bookmark : <span id="bookmark">bookmark</span></p>
+                  <p>Rent : <span id="rent">Rent</span></p>
+                </div>
               </div>
+                <table class="table table-borderless text-center">
+                  <thead>
+                    <tr>
+                      <th colspan="5">List Rent</th>
+                    </tr>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Price</th>
+                      <th>Start - Finish</th>
+                      <th>Status</th>
+                      <th>List Item</th>
+                    </tr>
+                  </thead>
+                  <tbody id="listRent"></tbody>
+                </table>
+                <table class="table table-borderless text-center">
+                  <thead>
+                    <tr>
+                      <th colspan="3">List Bookmark</th>
+                    </tr>
+                  </thead>
+                  <tbody id="listBookmark"></tbody>
+                </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-
-function detailData(id_cs, id_member, userName, userAvatar) {
-    const data = {
-        id_cs: id_cs,
-        id_member: id_member,
-        username: userName,
-        useravatar: userAvatar
-    };
-    localStorage.setItem('Chat', JSON.stringify(data));
-    window.location.href = '../../dashboard/cs/message.html';
-}
-    document.addEventListener('DOMContentLoaded', function() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    const id = userData.data.id_user
-      const getData = () => {
-      axios.get(`https://rentconsoleapi.yudho.online/service/group/${id}`)
-        .then((response) => {
-        console.log(response)
-        let chat = response.data.data;
-        let bucketChat = ``;
-        if (chat.length > 0) {
-          for (let i = 0; i < chat.length; i++) {
-            let userAvatar = chat[i].users.length > 0 ? chat[i].users[0].avatar : 'null';
-            let userName = chat[i].users.length > 0 ? chat[i].users[0].name : 'null';
-            let id_member = chat[i].users.length > 1 ? chat[i].users[1].id_member : 'null';
-            bucketChat += `
-            <div class="container-chat" type="button" onclick="detailData('${chat[i].id_cs}','${id_member}','${userName}' ,'${userAvatar}')">
-                  <img src="${userAvatar}" alt="Avatar" class="img-review">
-                  <h5>${userName}</h5>
-                  <p class="last-message">${[chat[i].last_message]} </p>
-                  <span class="time-right">${[chat[i].update_at]}</span>
-            </div>
-              `
-          }
-        }else {
-          bucketReview += ``
-        }
-        document.getElementById('listChat').innerHTML = bucketChat;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-      }
-      getData()
-      
-      function handleDivClick(id) {
-        alert("Div clicked for transaction ID: ");
-      }
-
-  if (userData) {
-  console.log(userData)
-  } else {
-    // Jika tidak ada data pengguna, redirect ke halaman login
-    window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
-  }
-
-  // Tambahkan event listener untuk tombol logout
-  document.getElementById('logoutButton').addEventListener('click', function() {
-            // Hapus data pengguna dari localStorage
-    localStorage.removeItem('userData');
-            // Redirect ke halaman login
-    window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
-  });
-});
-    </script>
+    <script src="../../resources/js/userDetail.js"></script>
     <script src="../../resources/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

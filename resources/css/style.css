@@ -239,6 +239,10 @@ a.sidebar-link:hover {
   color: #aaa;
 }
 
+.last-message {
+  float: left;
+}
+
 .scroll {
   max-height: 10px;
   overflow-y: auto;

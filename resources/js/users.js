@@ -16,6 +16,20 @@ const saveData = async () => {
     alert(error.response.data.message)
   });
 };
+
+function detailData(uid) {
+  axios.get(`https://rentconsoleapi.yudho.online/person/single/${uid}`)
+  .then((response) => {
+    console.log(response)
+    localStorage.setItem('UserDetail', JSON.stringify(response.data));
+    window.location.href = '../../dashboard/users/userDetail.html';
+  })
+  .catch((error) => {
+    console.log(error);
+    alert("Ndak bisa ambil data")
+  })
+}
+
 const deleteDataUser = async (uid) => {
   const id = uid
   await axios.delete(`https://rentconsoleapi.yudho.online/person/${id}`)
@@ -46,6 +60,7 @@ await axios.get('https://rentconsoleapi.yudho.online/person/?filter=user')
             <td>${user[i].email}</td>
             <td>
               <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                <button onclick="detailData(${user[i].uid})" type="button" class="btn btn-success">Detail</button>
                 <button onclick="deleteDataUser(${user[i].uid})" type="button" class="btn btn-danger">Delete</button>
               </div>
             </td>

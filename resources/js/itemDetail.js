@@ -188,11 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const userData = JSON.parse(localStorage.getItem('userData'));
 
-    if (detail) {
-    console.log(detail)
+    if (userData) {
+    console.log(userData)
     } else {
       // Jika tidak ada data pengguna, redirect ke halaman login
-      window.location.href = 'item.html'; // Ganti dengan halaman login yang sesuai
+      window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
     }
     
     // Tambahkan event listener untuk tombol logout
