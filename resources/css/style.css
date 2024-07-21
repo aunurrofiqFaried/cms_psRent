@@ -247,3 +247,8 @@ a.sidebar-link:hover {
   max-height: 10px;
   overflow-y: auto;
 }
+
+.card-body {
+  max-height: 520px;
+  overflow-y: auto;
+}
