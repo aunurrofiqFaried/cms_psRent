@@ -252,3 +252,35 @@ a.sidebar-link:hover {
   max-height: 520px;
   overflow-y: auto;
 }
+
+#listChat {
+  max-height: 425px;
+  overflow-y: auto; 
+}
+
+@media only screen and (max-width: 600px) {
+
+  .card-body {
+    max-height: 650px;
+    overflow-y: auto;
+  }
+
+  .position-absolute {
+    width: 350px;
+  }
+
+  #listChat {
+  max-height: 630px;
+  overflow-y: auto; 
+  font-size: small;
+
+}
+  #avatar {
+    width: 250px;
+  }
+
+  #detil {
+    margin-top: 250px;
+    margin-left: -30px;
+  }
+}

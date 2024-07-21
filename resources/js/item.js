@@ -225,12 +225,14 @@ await axios.get('https://rentconsoleapi.yudho.online/item')
             <td>Rp.${item[i].harga_sewa}</td>
             <td>
               <div class="input-group input-group-sm">
-              <span class="input-group-text px-3">Stock</span>
-                <button class="btn btn-danger" onclick="decreseStock('${item[i].id_barang}','${item[i].stock}')">-</button>
-                <span class="input-group-text px-3">${item[i].stock}</span>
-                <button class="btn btn-primary" onclick="increseStock('${item[i].id_barang}','${item[i].stock}')">+</button>
-                </div>
-              </td>
+              <p class="d-flex justify-content-center">
+              <span class="input-group-text me-1">Stock</span>
+                <button class="btn btn-danger me-1" onclick="decreseStock('${item[i].id_barang}','${item[i].stock}')">-</button>
+                <span class="input-group-text ">${item[i].stock}</span>
+                <button class="btn btn-primary ms-1" onclick="increseStock('${item[i].id_barang}','${item[i].stock}')">+</button>
+              </p>
+              </div>
+            </td>
             <td>
               <div class="btn-group btn-group-sm" role="group">
                 <button onclick="detailData('${item[i].id_barang}')" type="button" class="btn btn-success">Detail</button>

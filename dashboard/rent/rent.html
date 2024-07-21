@@ -89,16 +89,7 @@
             </div>
             <div class="card-body">
               <table class="table table-borderless text-center">
-                <thead>
-                  <tr>
-                    <th>User Avatar</th>
-                    <th>Username</th>
-                    <th>Order ID</th>
-                    <th>Masa Rental</th>
-                    <th>Status Pembayaran</th>
-                    <th></th>
-                  </tr>
-                </thead>
+                
                 <tbody id="result"></tbody>
               </table>
             </div>
@@ -134,7 +125,7 @@
                   <td><img src="${[rent[i].user.avatar]}" alt="Avatar" class="avatar"></td>
                   <td>${rent[i].user.name}</td>
                   <td>${rent[i].order_id}</td>
-                  <td>${rent[i].date.start} - ${rent[i].date.end}</td>
+                  <td><p>${rent[i].date.start} - ${rent[i].date.end}</p></td>
                   <td>${rent[i].status}</td>
                   <td>
                     <button onclick="deleteData('${rent[i].order_id}')" type="button" class="btn btn-danger btn-sm">Delete</button>

@@ -124,3 +124,39 @@ section h2 {
   font-weight: bolder;
   color: rgb(0, 0, 0);
 }
+
+.card {
+  width : 245px;
+}
+
+.card-game {
+  width : 230px;
+}
+
+.gallery-img {
+  width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width : 150px;
+  }
+  
+  .card-game {
+    width : 110px;
+    margin-bottom: 15px;
+  }
+
+  .text-console {
+    font-size: small;
+  }
+
+  .text-game {
+    font-size: small;
+  }
+  
+  .gallery {
+    width: 200px;
+    margin-bottom: 17px;
+  }
+}
