@@ -97,81 +97,8 @@
         </div>
       </div>
     </div>
-    <script>
-      const deleteData = async (order_id) => {
-        const id = order_id
-        await axios.delete(`https://rentconsoleapi.yudho.online/rent/payment?order_id=${order_id}`)
-          .then((response) => {
-            console.log(response);
-            location.reload(true)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-    document.addEventListener('DOMContentLoaded', function() {
-      const getData = async () => {
-      await axios.get('https://rentconsoleapi.yudho.online/rent')
-        .then((response) => {
-          let bucket = ``;
-          let rent = response.data.data;
-          if (rent.length > 0) {
-            for (let i = 0; i < rent.length; i++) {
-              if (rent[i].user.avatar == null) {
-                rent[i].user.avatar = "https://www.svgrepo.com/show/327465/person-circle.svg"
-              }
-              bucket += `
-                <tr>
-                  <td><img src="${[rent[i].user.avatar]}" alt="Avatar" class="avatar"></td>
-                  <td>${rent[i].user.name}</td>
-                  <td>${rent[i].order_id}</td>
-                  <td><p>${rent[i].date.start} - ${rent[i].date.end}</p></td>
-                  <td>${rent[i].status}</td>
-                  <td>
-                    <button onclick="deleteData('${rent[i].order_id}')" type="button" class="btn btn-danger btn-sm">Delete</button>
-                  </td>
-                </tr>`
-            }
-          }else {
-            bucket += `
-              <tr>
-                <td colspan="4" class="text-center">
-                  Data Tidak Ada
-                </td>
-              </tr>`
-          }
-          document.getElementById('result').innerHTML = bucket;
-        })
-        .catch((error) => {
-          let bucket = `
-            <tr>
-              <td colspan="4" class="text-center">
-                ${error.message="Gangguan..."}
-              </td>
-            </tr>`;
-          document.getElementById('result').innerHTML = bucket;
-        });
-      }
-      getData()
-      const userData = JSON.parse(localStorage.getItem('userData'));
-
-  if (userData) {
-  console.log(userData)
-  } else {
-    // Jika tidak ada data pengguna, redirect ke halaman login
-    window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
-  }
-
-  // Tambahkan event listener untuk tombol logout
-  document.getElementById('logoutButton').addEventListener('click', function() {
-            // Hapus data pengguna dari localStorage
-    localStorage.removeItem('userData');
-            // Redirect ke halaman login
-    window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
-  });
-});
-    </script>
     <script src="../../resources/js/main.js"></script>
+    <script src="../../resources/js/rent.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

@@ -249,20 +249,21 @@ a.sidebar-link:hover {
 }
 
 .card-body {
-  max-height: 520px;
+  max-height: 85vh;
   overflow-y: auto;
 }
 
 #listChat {
-  max-height: 425px;
+  max-height: 75vh;
   overflow-y: auto; 
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
 
   .card-body {
-    max-height: 650px;
+    max-height: 85vh;
     overflow-y: auto;
+    font-size: small;
   }
 
   .position-absolute {
@@ -270,7 +271,7 @@ a.sidebar-link:hover {
   }
 
   #listChat {
-  max-height: 630px;
+  max-height: 75vh;
   overflow-y: auto; 
   font-size: small;
 

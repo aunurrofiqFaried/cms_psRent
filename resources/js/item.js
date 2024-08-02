@@ -37,7 +37,7 @@ document.getElementById('formFile').addEventListener('change', function(event) {
       reader.readAsDataURL(file);
   });
 
-function uploadImage() {
+function uploadData() {
       const fileInput = document.getElementById('formFile');
       const file = fileInput.files[0];
 
@@ -81,6 +81,7 @@ function uploadImage() {
           console.error('Terjadi kesalahan:', error);
       });
   }
+
 function editData(id) {
       const fileInput = document.getElementById('formFile');
       const file = fileInput.files[0];
@@ -148,36 +149,32 @@ const updateData = async (id, nama, gambar, jenis, deskripsi, stock, harga) => {
 function increseStock(id) {
   const userData = JSON.parse(localStorage.getItem('userData'));
   const dataUser = userData.data.id_user
-
   axios.post(`https://rentconsoleapi.yudho.online/item/stock`, {
     id_user: dataUser,
     id_barang: id,
     stock: 1
   })
   .then((response) => {
-    console.log(response);
     location.reload(true)
   })
   .catch((error) => {
-    console.log(error);
+    alert(error.message);
   });
 }
 
 function decreseStock(id) {
   const userData = JSON.parse(localStorage.getItem('userData'));
   const dataUser = userData.data.id_user
-
   axios.post(`https://rentconsoleapi.yudho.online/item/stock`, {
     id_user: dataUser,
     id_barang: id,
     stock: -1
   })
   .then((response) => {
-    console.log(response);
     location.reload(true)
   })
   .catch((error) => {
-    console.log(error);
+    console.log(error.message);
   });
 }
 
@@ -197,77 +194,74 @@ function detailData(id) {
 const deleteData = async (uid) => {
   await axios.delete(`https://rentconsoleapi.yudho.online/item/${uid}`)
     .then((response) => {
-      console.log(response);
       location.reload(true)
     })
     .catch((error) => {
-      console.log(error);
       alert("Item Masih Di SEWA Pelanggan!")
     });
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-const getData = async () => {
-await axios.get('https://rentconsoleapi.yudho.online/item')
-  .then((response) => {
-    let bucket = ``;
-    let item = response.data.data;
-    if (item.length > 0) {
-      for (let i = 0; i < item.length; i++) {
-        if (item[i].gambar_barang == null) {
-          item[i].gambar_barang = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/640px-Playstation_logo_colour.svg.png"
-          // console.log(item[i].gambar_barang)
-        }
-        bucket += `
-          <tr>
-            <td><img src="${[item[i].gambar_barang]}" alt="Avatar" class="img-item"></td>
-            <td>${item[i].nama_barang}</td>
-            <td>Rp.${item[i].harga_sewa}</td>
-            <td>
-              <div class="input-group input-group-sm">
-              <p class="d-flex justify-content-center">
-              <span class="input-group-text me-1">Stock</span>
-                <button class="btn btn-danger me-1" onclick="decreseStock('${item[i].id_barang}','${item[i].stock}')">-</button>
-                <span class="input-group-text ">${item[i].stock}</span>
-                <button class="btn btn-primary ms-1" onclick="increseStock('${item[i].id_barang}','${item[i].stock}')">+</button>
-              </p>
-              </div>
-            </td>
-            <td>
-              <div class="btn-group btn-group-sm" role="group">
-                <button onclick="detailData('${item[i].id_barang}')" type="button" class="btn btn-success">Detail</button>
-                <button onclick="updateData('${item[i].id_barang}','${item[i].nama_barang}','${item[i].gambar_barang}','${item[i].jenis_barang}','${item[i].deskripsi_barang}','${item[i].stock}','${item[i].harga_sewa}')" type="button" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Update</button>
-                <button onclick="deleteData('${item[i].id_barang}')" type="button" class="btn btn-sm btn-danger">Delete</button>
-                </div>
-            </td>
-          </tr>`
-      }
-    }else {
-      bucket += `
-        <tr>
-          <td colspan="4" class="text-center">
-            Data Tidak Ada
-          </td>
-        </tr>`
-    }
-    document.getElementById('result').innerHTML = bucket;
-  })
-  .catch((error) => {
-    let bucket = `
-      <tr>
-        <td colspan="4" class="text-center">
-          ${error.message="Gangguan..."}
-        </td>
-      </tr>`;
-    document.getElementById('result').innerHTML = bucket;
-  });
-}
-getData()
+
 // Ambil data pengguna dari localStorage
 const userData = JSON.parse(localStorage.getItem('userData'));
-
 if (userData) {
-console.log(userData)
+  document.addEventListener('DOMContentLoaded', function() {
+    const getData = async () => {
+    await axios.get('https://rentconsoleapi.yudho.online/item')
+      .then((response) => {
+        let bucket = ``;
+        let item = response.data.data;
+        if (item.length > 0) {
+          for (let i = 0; i < item.length; i++) {
+            if (item[i].gambar_barang == null) {
+              item[i].gambar_barang = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/640px-Playstation_logo_colour.svg.png"
+            }
+            bucket += `
+              <tr>
+                <td><img src="${[item[i].gambar_barang]}" alt="Avatar" class="img-item"></td>
+                <td>${item[i].nama_barang}</td>
+                <td>Rp.${item[i].harga_sewa}</td>
+                <td>
+                  <div class="input-group input-group-sm">
+                  <p class="d-flex justify-content-center ">
+                  <span class="input-group-text me-1">Stock</span>
+                    <button class="btn btn-danger me-1" onclick="decreseStock('${item[i].id_barang}','${item[i].stock}')">-</button>
+                    <span class="input-group-text ">${item[i].stock}</span>
+                    <button class="btn btn-primary ms-1" onclick="increseStock('${item[i].id_barang}','${item[i].stock}')">+</button>
+                  </p>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group btn-group-sm" role="group">
+                    <button onclick="detailData('${item[i].id_barang}')" type="button" class="btn btn-success">Detail</button>
+                    <button onclick="updateData('${item[i].id_barang}','${item[i].nama_barang}','${item[i].gambar_barang}','${item[i].jenis_barang}','${item[i].deskripsi_barang}','${item[i].stock}','${item[i].harga_sewa}')" type="button" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Update</button>
+                    <button onclick="deleteData('${item[i].id_barang}')" type="button" class="btn btn-sm btn-danger">Delete</button>
+                    </div>
+                </td>
+              </tr>`
+          }
+        }else {
+          bucket += `
+            <tr>
+              <td colspan="4" class="text-center">
+                Data Tidak Ada
+              </td>
+            </tr>`
+        }
+        document.getElementById('result').innerHTML = bucket;
+      })
+      .catch((error) => {
+        let bucket = `
+          <tr>
+            <td colspan="4" class="text-center">
+              ${error.message="Gangguan..."}
+            </td>
+          </tr>`;
+        document.getElementById('result').innerHTML = bucket;
+      });
+    }
+    getData()
+  });
 } else {
   // Jika tidak ada data pengguna, redirect ke halaman login
   window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
@@ -279,5 +273,4 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.removeItem('userData');
           // Redirect ke halaman login
   window.location.href = '../../login.html'; // Ganti dengan halaman login yang sesuai
-});
 });

@@ -16,7 +16,6 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  scrollbar-height: none;  /* Firefox */
 }
 
 /* navbar */
@@ -137,7 +136,8 @@ section h2 {
   width: 300px;
 }
 
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 900px) {
   .card {
     width : 150px;
   }
@@ -156,7 +156,7 @@ section h2 {
   }
   
   .gallery {
-    width: 200px;
+    width: 190px;
     margin-bottom: 17px;
   }
 }
