@@ -35,7 +35,7 @@ body {
 }
 
 .navbar-brand {
-  color: #2F80ED !important;
+  color: #8fb5e7 !important;
 }
 
 .navbar .navbar-nav .nav-link {
@@ -45,7 +45,7 @@ body {
 
 .navbar .navbar-nav .nav-link.active,
 .navbar .navbar-nav .nav-link:hover {
-  color: #2F80ED;
+  color:  #8fb5e7 ;
 }
 
 /* header */
